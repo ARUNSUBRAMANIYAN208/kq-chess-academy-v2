@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <!-- Brand Colors: Gold #d4af37, White #ffffff -->
+  
+  <!-- Icon Section -->
+  <g transform="translate(10, 15)">
+    <!-- Solid Gold Square -->
+    <rect x="0" y="0" width="35" height="35" fill="#28a745" rx="2" />
+    
+    <!-- Outlined White Square (Overlapping) -->
+    <rect x="15" y="15" width="35" height="35" stroke="#ffffff" stroke-width="3" fill="none" rx="2" />
+  </g>
+
+  <!-- Text Section -->
+  <text x="70" y="52" font-family="'Inter', sans-serif" font-weight="bold" font-size="28" fill="#ffffff" letter-spacing="1">
+    KQ CHESS ACADEMY
+  </text>
+</svg>
