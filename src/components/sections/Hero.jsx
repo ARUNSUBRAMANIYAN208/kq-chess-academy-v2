@@ -25,7 +25,7 @@ const Hero = () => {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="inline-block lg:block"
                     >
-                        <div className="inline-flex items-center px-4 py-2 rounded-full border border-brand-primary/20 bg-brand-primary/5 text-brand-dark font-bold tracking-wider text-xs uppercase mb-8">
+                        <div className="inline-flex items-center px-4 py-2 rounded-full border border-brand-primary/20 bg-brand-primary/5 text-brand-dark font-bold tracking-wider text-xs uppercase mb-8 mt-4">
                             <span className="w-2 h-2 rounded-full bg-brand-primary mr-3 animate-pulse"></span>
                             Welcome to KQ Chess Academy
                         </div>

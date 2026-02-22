@@ -2,9 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Camera, ArrowRight } from 'lucide-react';
-import chessTournament from '../../assets/chess_tournament.png';
-import chessClass from '../../assets/chess_class.png';
-import chessWinner from '../../assets/chess_winner.png';
+import chessTournament from '../../assets/tournament_4.jpeg';
+import chessClass from '../../assets/tournament_5.jpeg';
+import chessWinner from '../../assets/tournament_6.jpeg';
 
 const GalleryPreview = () => {
     return (

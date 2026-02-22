@@ -8,55 +8,55 @@ const HomeCenters = () => {
             name: "Kotturpuram",
             address: "@Royal Habitat 5, 4th main road Extension Kottur Gardens, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Mylapore",
             address: "@ Akshara Play School 23, Kesavaperumal S St, Alamelu Manga Puram, Mandavelipakkam, Mylapore, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Kottivakkam",
             address: "@ Hellokids Aadhya Door no 2, Plot no 2A, AGS Colony 3rd Main Rd, near Nobel Hospital, AGS Colony, Kottivakkam",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Adyar",
             address: "@ 8/19, 2nd Cresent Park Rd, Sector 3, Adyar, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Virugambakkam",
             address: "@ Shah Academics 355V+CGM, Natesan Nagar, Chinmaya Nagar, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "RA Puram",
             address: "@ Tusk and Quill 2nd Main Rd, Raja Annamalaipuram, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Mugalivakkam",
             address: "@ Pebhok International Preschool, No.1, Groundfloor, Ramachandra Nagar, Madhanandhapuram, Mugalivakkam, Porur, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "Pallikaranai",
             address: "@ NPRN SWAMI VIVEKANANDA PAYILAGAM, Bhavaniamman, Kannabiran Koil St, Surya Nagar, Medavakkam, Chennai",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         },
         {
             name: "KK Nagar",
             address: "@SWRL Academy, 592, Alagirisamy Salai, Sector 9, K. K. Nagar, Chennai, Tamil Nadu 600078",
             phone: "+91 94444 75095",
-            email: "contact@kqchessacademy.com"
+            email: "yoursmvin@gmail.com"
         }
     ];
 

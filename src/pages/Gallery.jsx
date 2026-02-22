@@ -3,16 +3,23 @@ import { motion } from 'framer-motion';
 import chessTournament from '../assets/chess_tournament.png';
 import chessClass from '../assets/chess_class.png';
 import chessWinner from '../assets/chess_winner.png';
+// New Tournament Images
+import tournament1 from '../assets/tournament_4.jpeg';
+import tournament2 from '../assets/tournament_5.jpeg';
+import tournament3 from '../assets/tournament_6.jpeg';
 
 const Gallery = () => {
     // Reusing images to create a fuller gallery grid
     const images = [
-        { src: chessTournament, title: "State Level Tournament 2024" },
-        { src: chessClass, title: "Weekend Advanced Batch" },
-        { src: chessWinner, title: "National Junior Champion" },
-        { src: chessClass, title: "Beginners Classroom" },
-        { src: chessTournament, title: "Inter-School Competition" },
-        { src: chessWinner, title: "Prize Distribution Ceremony" },
+        { src: tournament1, title: "" },
+        { src: tournament2, title: "" },
+        { src: tournament3, title: "" },
+        // { src: chessTournament, title: "State Level Tournament 2024" },
+        // { src: chessClass, title: "Weekend Advanced Batch" },
+        // { src: chessWinner, title: "National Junior Champion" },
+        // { src: chessClass, title: "Beginners Classroom" },
+        // { src: chessTournament, title: "Inter-School Competition" },
+        // { src: chessWinner, title: "Prize Distribution Ceremony" },
     ];
 
     return (

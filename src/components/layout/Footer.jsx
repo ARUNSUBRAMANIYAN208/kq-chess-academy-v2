@@ -36,13 +36,26 @@ const Footer = () => {
                                 <MapPin className="h-5 w-5 mr-3 text-brand-primary shrink-0" />
                                 <span>Kotturpuram, Chennai, Tamil Nadu</span>
                             </li>
+
                             <li className="flex items-center">
                                 <Phone className="h-5 w-5 mr-3 text-brand-primary shrink-0" />
-                                <span>+91 94444 75095</span>
+                                <a href="tel:+919444475095" className="hover:underline">
+                                    +91 94444 75095
+                                </a>
                             </li>
+
+                            <li className="flex items-center">
+                                <Phone className="h-5 w-5 mr-3 text-brand-primary shrink-0" />
+                                <a href="tel:+919787949579" className="hover:underline">
+                                    +91 97879 49579
+                                </a>
+                            </li>
+
                             <li className="flex items-center">
                                 <Mail className="h-5 w-5 mr-3 text-brand-primary shrink-0" />
-                                <span>contact@kqchessacademy.com</span>
+                                <a href="mailto:yoursmvin@gmail.com" className="hover:underline">
+                                    yoursmvin@gmail.com
+                                </a>
                             </li>
                         </ul>
                     </div>

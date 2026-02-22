@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Calendar, MapPin, Clock, ExternalLink, Award, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Tournaments = () => {
     const upcomingTournaments = [
@@ -64,12 +65,12 @@ const Tournaments = () => {
                             Compete with the best. Experience the thrill of over-the-board and online chess tournaments organized by KQ Chess Academy.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <button className="bg-brand-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-light transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(46,125,50,0.4)]">
+                            <Link to="/register/1" className="bg-brand-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-light transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(46,125,50,0.4)]">
                                 Register Now
-                            </button>
-                            <button className="bg-gray-800 text-white border border-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-700 transition-all transform hover:-translate-y-1">
+                            </Link>
+                            {/* <button className="bg-gray-800 text-white border border-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-700 transition-all transform hover:-translate-y-1">
                                 View Results
-                            </button>
+                            </button> */}
                         </div>
                     </motion.div>
                 </div>
@@ -141,9 +142,9 @@ const Tournaments = () => {
                                             <span className="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Prize Pool</span>
                                             <span className="text-2xl font-black text-brand-primary">{tournament.prizePool}</span>
                                         </div>
-                                        <button className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20">
-                                            View Details
-                                        </button>
+                                        <Link to={`/register/${tournament.id}`} className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20 text-center">
+                                            Register Now
+                                        </Link>
                                     </div>
                                 </div>
                             </motion.div>

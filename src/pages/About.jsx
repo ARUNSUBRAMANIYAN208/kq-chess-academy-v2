@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Team from '../components/sections/Team';
 import Achievements from '../components/sections/Achievements';
+import FounderProfile from '../components/sections/FounderProfile';
 
 const About = () => {
     return (
@@ -51,45 +52,14 @@ const About = () => {
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="bg-gray-50 p-8 rounded-2xl border border-brand-primary/20"
+                            className="bg-gray-50 flex flex-col items-center justify-center p-8 rounded-2xl border border-brand-primary/20 h-full"
                         >
-                            <h3 className="text-2xl font-bold text-brand-primary mb-2">M. Vinothkumar, FIDE Master</h3>
-                            <p className="text-gray-500 text-sm mb-4 uppercase tracking-wider">International Chess Coach | Founder</p>
-
-                            <div className="space-y-4 text-gray-600 mb-6">
-                                <p className="italic">"Coaching is My Passion"</p>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-white p-3 rounded-lg border border-gray-800">
-                                        <p className="text-brand-primary font-bold text-lg">2331</p>
-                                        <p className="text-xs text-gray-500 uppercase">Peak FIDE Rating</p>
-                                    </div>
-                                    <div className="bg-white p-3 rounded-lg border border-gray-800">
-                                        <p className="text-brand-primary font-bold text-lg">22+ Yrs</p>
-                                        <p className="text-xs text-gray-500 uppercase">Experience</p>
-                                    </div>
+                            <div className="text-center">
+                                <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-brand-primary/20 mx-auto flex items-center justify-center bg-brand-primary/5 text-brand-primary text-6xl shadow-sm mb-6">
+                                    ♔
                                 </div>
-                                <ul className="text-sm space-y-2">
-                                    <li className="flex items-start">
-                                        <span className="text-brand-primary mr-2">•</span>
-                                        International FM Awarded by FIDE (2009)
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-brand-primary mr-2">•</span>
-                                        Multiple All India FIDE Rated Tournament Winner
-                                    </li>
-                                    <li className="flex items-start">
-                                        <span className="text-brand-primary mr-2">•</span>
-                                        Represented Tamil Nadu in National Championships
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                                {["FM Title", "Expert Trainer", "Tournament Organizer"].map((tag) => (
-                                    <span key={tag} className="bg-brand-primary/10 text-brand-primary border border-brand-primary/20 font-bold px-3 py-1 rounded-full text-xs">
-                                        {tag}
-                                    </span>
-                                ))}
+                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Since 1997</h3>
+                                <p className="text-gray-500 text-lg">Creating Champions for over two decades</p>
                             </div>
                         </motion.div>
 
@@ -97,6 +67,7 @@ const About = () => {
                 </div>
             </section>
 
+            <FounderProfile />
             <Team />
             <Achievements />
         </div>

@@ -7,6 +7,7 @@ import Programs from './pages/Programs';
 import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Tournaments from './pages/Tournaments';
+import TournamentRegistration from './pages/TournamentRegistration';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/programs" element={<Programs />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/tournaments" element={<Tournaments />} />
+          <Route path="/register/:id" element={<TournamentRegistration />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>

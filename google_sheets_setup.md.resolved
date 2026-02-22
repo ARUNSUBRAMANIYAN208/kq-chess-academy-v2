@@ -1,0 +1,68 @@
+# Connecting Your React Form to Google Sheets
+
+Follow these quick steps to make the tournament registration form send data directly to your personal Google Sheet.
+
+## Step 1: Create a Google Sheet
+1. Open [Google Sheets](https://sheets.google.com) and create a new Blank spreadsheet.
+2. Name it "Tournament Registrations".
+3. In the first row, add the EXACT following headers (they must match exactly, case-sensitive):
+   - `submissionDate`
+   - `tournamentName`
+   - `tournamentDate`
+   - `playerName`
+   - `fideId`
+   - `fideRating`
+   - `dob`
+   - `email`
+   - `phone`
+   - `district`
+
+## Step 2: Add the Code
+1. Click on **Extensions** > **Apps Script** in the top menu of your Google Sheet.
+2. Delete any code there and paste this exact script:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  
+  // Get data from the React form
+  var rowData = [
+    e.parameter.submissionDate || new Date(),
+    e.parameter.tournamentName,
+    e.parameter.tournamentDate,
+    e.parameter.playerName,
+    e.parameter.fideId,
+    e.parameter.fideRating,
+    e.parameter.dob,
+    e.parameter.email,
+    e.parameter.phone,
+    e.parameter.district
+  ];
+  
+  // Append new row
+  sheet.appendRow(rowData);
+  
+  // Return success response to React
+  return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+3. Click the **Save** icon (looks like a floppy disk).
+
+## Step 3: Publish as a Web App
+1. Click the blue **Deploy** button in the top right > **New deployment**.
+2. Click the gear icon "Select type" and choose **Web app**.
+3. Fill out the details:
+   - **Description**: Form Receiver
+   - **Execute as**: Me (Your Email)
+   - **Who has access**: Anyone (THIS IS IMPORTANT!)
+4. Click **Deploy**. (You may need to authorize access by clicking "Review permissions" -> Choose your account -> Advanced -> Go to script).
+5. Copy the **Web app URL** that appears.
+
+## Step 4: Add URL to the Codebase
+1. Open the file [src/pages/TournamentRegistration.jsx](file:///d:/My_Projects/kq-chess-academy-v2/src/pages/TournamentRegistration.jsx) in your project.
+2. Find line 75: `const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';`
+3. Replace `'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL'` with the URL you just copied. Keep the single quotes around the URL.
+
+That's it! Every time someone submits the registration form, it will instantly appear in your Google Sheet.
