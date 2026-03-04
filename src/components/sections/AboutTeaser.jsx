@@ -45,7 +45,7 @@ const AboutTeaser = () => {
                         {/* Stat Cards */}
                         <div className="bg-white p-6 rounded-xl border border-gray-800 hover:border-brand-primary/50 transition-colors">
                             <Trophy className="h-10 w-10 text-brand-primary mb-4" />
-                            <h4 className="text-2xl font-bold text-gray-900 mb-1">1997</h4>
+                            <h4 className="text-2xl font-bold text-gray-900 mb-1">2007</h4>
                             <p className="text-gray-500 text-sm">Established</p>
                         </div>
                         <div className="bg-white p-6 rounded-xl border border-gray-800 hover:border-brand-primary/50 transition-colors">

@@ -9,6 +9,7 @@ import UpcomingEvents from '../components/sections/UpcomingEvents';
 import FAQ from '../components/sections/FAQ';
 import HomeCenters from '../components/sections/HomeCenters';
 import HomeCurriculum from '../components/sections/HomeCurriculum';
+import FeaturedVideo from '../components/sections/FeaturedVideo';
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <AboutTeaser />
             <WhyChooseUs />
             <HomeCurriculum />
+            <FeaturedVideo />
             <UpcomingEvents />
             <GalleryPreview />
             <HomeCenters />

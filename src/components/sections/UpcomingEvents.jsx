@@ -1,22 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import { Calendar, Clock, MapPin, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const UpcomingEvents = () => {
     const events = [
         {
-            title: "Weekend Rapid Tournament",
-            date: "Every Saturday",
-            time: "5:00 PM - 8:00 PM",
-            location: "KQ Chess Academy (All Centers)",
-            description: "Weekly rapid chess tournaments for students to test their skills."
+            id: 1,
+            title: "Golden Jubilee State Level Tournament",
+            date: "Aug 03, 2025",
+            time: "09:00 AM",
+            location: "P.S. Senior Secondary School, Mylapore",
+            description: "Tamilnadu State Level Chess Tournament organized for the Golden Jubilee Celebrations. FIDE Rated & Unrated events."
         },
         {
-            title: "Summer Chess Camp",
-            date: "May 1st - May 15th",
-            time: "9:00 AM - 1:00 PM",
-            location: "Kotturpuram Center",
-            description: "Intensive training camp for beginners and intermediates."
+            id: 2,
+            title: "SRM IST State Level Tournament",
+            date: "Sep 20, 2025",
+            time: "09:00 AM",
+            location: "SRM IST Ramapuram Campus",
+            description: "Tamilnadu State Level Chess Tournament hosted at SRM IST Faculty of Science and Humanities."
         }
     ];
 
@@ -54,8 +57,17 @@ const UpcomingEvents = () => {
                                         <Clock className="h-4 w-4 mr-1" /> {event.time}
                                     </div>
                                     <div className="flex items-center">
-                                        <MapPin className="h-4 w-4 mr-1" /> {event.location}
+                                        <MapPin className="h-4 w-4 mr-1" /> <span className="truncate max-w-[200px] sm:max-w-none">{event.location}</span>
                                     </div>
+                                </div>
+                                <div className="mt-5">
+                                    <Link
+                                        to={`/register/${event.id}`}
+                                        className="inline-flex items-center px-5 py-2 rounded-lg bg-brand-primary text-white font-bold text-sm hover:bg-brand-dark transition-colors"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        Register Now <ArrowRight className="ml-2 w-4 h-4" />
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Globe, Users, CheckCircle } from 'lucide-react';
+import { BookOpen, Globe, Users, CheckCircle, ExternalLink, ArrowRight } from 'lucide-react';
 
 const Programs = () => {
     const curriculum = [
@@ -32,6 +32,11 @@ const Programs = () => {
                     <p className="text-gray-600 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
                         Expertly designed to cultivate strategic thinking, pattern recognition, and guide you to chess excellence.
                     </p>
+                    <div className="mt-10 flex justify-center">
+                        <a href="https://coaching.kqchessacademy.com/" target="_blank" rel="noopener noreferrer" className="bg-brand-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-dark transition-all shadow-lg hover:shadow-brand-primary/30 transform hover:-translate-y-1 flex items-center">
+                            Access Coaching Portal <ExternalLink className="ml-2 w-5 h-5" />
+                        </a>
+                    </div>
                 </motion.div>
             </div>
 
@@ -68,6 +73,11 @@ const Programs = () => {
                                     Critical thinking focus & analysis
                                 </li>
                             </ul>
+                            <div className="mt-8 pt-6 border-t border-gray-100">
+                                <a href="https://coaching.kqchessacademy.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-brand-primary font-bold hover:text-brand-dark transition-colors group text-lg">
+                                    Go to Coaching Portal <ArrowRight className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
+                                </a>
+                            </div>
                         </motion.div>
 
                         <motion.div

@@ -2,41 +2,31 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Calendar, MapPin, Clock, ExternalLink, Award, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import FeaturedVideo from '../components/sections/FeaturedVideo';
 
 const Tournaments = () => {
     const upcomingTournaments = [
         {
             id: 1,
-            name: "KQ Grand Prix 2025",
-            date: "Jan 15-20, 2025",
-            venue: "KQ Chess Academy Main Hall",
+            name: "Golden Jubilee State Level Tournament",
+            date: "August 3, 2025",
+            venue: "P.S. Senior Secondary School, Mylapore",
             time: "09:00 AM",
-            format: "Swiss System, 9 Rounds",
+            format: "Swiss System, 4 Games",
             rating: "FIDE Rated & Unrated",
             status: "Registration Open",
-            prizePool: "$2,000"
+            prizePool: "₹10,000 top prize + Trophies"
         },
         {
             id: 2,
-            name: "Junior Chess Championship",
-            date: "Feb 10, 2025",
-            venue: "Online (Lichess)",
-            time: "10:00 AM",
-            format: "Rapid 15+10",
-            rating: "Under 16 Category",
+            name: "SRM IST State Level Tournament",
+            date: "September 20, 2025",
+            venue: "SRM IST Ramapuram Campus",
+            time: "09:00 AM",
+            format: "Swiss System, 4 Games",
+            rating: "FIDE Rated & Unrated Category",
             status: "Upcoming",
-            prizePool: "Trophies + Certificates"
-        },
-        {
-            id: 3,
-            name: "Weekend Rapid Fire",
-            date: "Every Saturday",
-            venue: "KQ Academy Center",
-            time: "04:00 PM",
-            format: "Blitz 5+3",
-            rating: "Open to All",
-            status: "Recurring",
-            prizePool: "Medals"
+            prizePool: "₹10,000 top prize + Medals"
         }
     ];
 
@@ -86,9 +76,9 @@ const Tournaments = () => {
                             </h2>
                             <p className="text-gray-500 text-lg">Register early to secure your spot.</p>
                         </div>
-                        <a href="#" className="text-brand-primary hover:text-brand-dark transition-colors flex items-center font-bold mt-4 md:mt-0 group">
+                        {/* <a href="#" className="text-brand-primary hover:text-brand-dark transition-colors flex items-center font-bold mt-4 md:mt-0 group">
                             Full Calendar <ExternalLink className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        </a> */}
                     </div>
 
                     <div className="grid gap-6">
@@ -152,6 +142,8 @@ const Tournaments = () => {
                     </div>
                 </div>
             </section>
+            {/* Featured Video Section */}
+            <FeaturedVideo />
 
             {/* Why Participate */}
             <section className="py-24 bg-white border-t border-gray-100">

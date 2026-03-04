@@ -18,7 +18,7 @@ const About = () => {
                         About <span className="text-brand-primary">KQ Chess Academy</span>
                     </motion.h1>
                     <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
-                        Fostering critical thinking and sportsmanship through the royal game of chess since 1997.
+                        Fostering critical thinking and sportsmanship through the royal game of chess since 2007.
                     </p>
                 </div>
             </div>
@@ -36,7 +36,7 @@ const About = () => {
                             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Legacy</h2>
                             <div className="space-y-6 text-gray-600 leading-relaxed">
                                 <p>
-                                    KQ Chess Academy was established in 1997, built on foundational excellence in chess coaching.
+                                    KQ Chess Academy was established in 2007, built on foundational excellence in chess coaching.
                                     With 12 branches across Chennai, we are dedicated to nurturing chess talent and fostering
                                     a love for the game from beginner to international levels.
                                 </p>
@@ -58,7 +58,7 @@ const About = () => {
                                 <div className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-brand-primary/20 mx-auto flex items-center justify-center bg-brand-primary/5 text-brand-primary text-6xl shadow-sm mb-6">
                                     ♔
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Since 1997</h3>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Since 2007</h3>
                                 <p className="text-gray-500 text-lg">Creating Champions for over two decades</p>
                             </div>
                         </motion.div>

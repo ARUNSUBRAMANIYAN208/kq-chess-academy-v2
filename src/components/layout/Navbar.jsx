@@ -12,7 +12,7 @@ const Navbar = () => {
     const links = [
         { name: 'Home', path: '/' },
         { name: 'About', path: '/about' },
-        { name: 'Programs', path: '/programs' },
+        { name: 'Coaching', path: '/programs' },
         { name: 'Tournaments', path: '/tournaments' },
         { name: 'Gallery', path: '/gallery' },
         { name: 'Contact', path: '/contact' },
@@ -40,10 +40,11 @@ const Navbar = () => {
                             </Link>
                         ))}
                         <Link
-                            to="/contact"
+                            // target='_blank'
+                            to="https://coaching.kqchessacademy.com/"
                             className="bg-brand-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-brand-dark transition-all shadow-sm transform hover:-translate-y-0.5"
                         >
-                            Enroll Now
+                            Online Coaching
                         </Link>
                     </div>
 

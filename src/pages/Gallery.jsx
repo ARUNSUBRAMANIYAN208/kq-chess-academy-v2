@@ -7,6 +7,13 @@ import chessWinner from '../assets/chess_winner.png';
 import tournament1 from '../assets/tournament_4.jpeg';
 import tournament2 from '../assets/tournament_5.jpeg';
 import tournament3 from '../assets/tournament_6.jpeg';
+import tournament4 from '../assets/tournament_7.jpeg';
+import tournament5 from '../assets/tournament_8.jpeg';
+import tournament6 from '../assets/tournament_9.jpeg';
+import tournament7 from '../assets/tournament_10.jpeg';
+import tournament8 from '../assets/tournament_11.jpeg';
+import tournament9 from '../assets/tournament_12.jpeg';
+import tournament10 from '../assets/tournament_13.jpeg';
 
 const Gallery = () => {
     // Reusing images to create a fuller gallery grid
@@ -14,6 +21,13 @@ const Gallery = () => {
         { src: tournament1, title: "" },
         { src: tournament2, title: "" },
         { src: tournament3, title: "" },
+        { src: tournament4, title: "" },
+        { src: tournament5, title: "" },
+        { src: tournament6, title: "" },
+        { src: tournament7, title: "" },
+        { src: tournament8, title: "" },
+        { src: tournament9, title: "" },
+        { src: tournament10, title: "" },
         // { src: chessTournament, title: "State Level Tournament 2024" },
         // { src: chessClass, title: "Weekend Advanced Batch" },
         // { src: chessWinner, title: "National Junior Champion" },
