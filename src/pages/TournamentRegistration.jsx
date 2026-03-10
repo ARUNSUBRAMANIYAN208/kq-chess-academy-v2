@@ -2,45 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Trophy, Calendar, MapPin, Clock, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
+import useTournaments from '../hooks/useTournaments';
 
 const TournamentRegistration = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-
-    // In a real app, this would be fetched from an API or shared state.
-    // We are reproducing the list here for demo purposes to get the details based on ID.
-    const tournaments = [
-        {
-            id: '1',
-            name: "KQ Grand Prix 2025",
-            date: "Jan 15-20, 2025",
-            venue: "KQ Chess Academy Main Hall",
-            time: "09:00 AM",
-            format: "Swiss System, 9 Rounds",
-            rating: "FIDE Rated & Unrated",
-            prizePool: "$2,000"
-        },
-        {
-            id: '2',
-            name: "Junior Chess Championship",
-            date: "Feb 10, 2025",
-            venue: "Online (Lichess)",
-            time: "10:00 AM",
-            format: "Rapid 15+10",
-            rating: "Under 16 Category",
-            prizePool: "Trophies + Certificates"
-        },
-        {
-            id: '3',
-            name: "Weekend Rapid Fire",
-            date: "Every Saturday",
-            venue: "KQ Academy Center",
-            time: "04:00 PM",
-            format: "Blitz 5+3",
-            rating: "Open to All",
-            prizePool: "Medals"
-        }
-    ];
+    const { tournaments, loading } = useTournaments();
 
     const tournament = tournaments.find(t => t.id === id);
 
@@ -58,10 +25,10 @@ const TournamentRegistration = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        if (!tournament) {
+        if (!loading && !tournament) {
             navigate('/tournaments');
         }
-    }, [tournament, navigate]);
+    }, [tournament, loading, navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -80,8 +47,15 @@ const TournamentRegistration = () => {
         Object.keys(formData).forEach(key => {
             dataToSubmit.append(key, formData[key]);
         });
-        dataToSubmit.append('tournamentName', tournament.name);
-        dataToSubmit.append('tournamentDate', tournament.date);
+
+        // Ensure we gracefully handle mapping where title/name might be interchangeable depending on the CSV
+        const tName = tournament.name || tournament.title || 'Unknown Tournament';
+        const tDate = tournament.date || 'Unknown Date';
+        const tVenue = tournament.venue || tournament.location || 'Unknown Venue';
+
+        dataToSubmit.append('tournamentName', tName);
+        dataToSubmit.append('tournamentDate', tDate);
+        dataToSubmit.append('tournamentVenue', tVenue);
 
         // Add timestamp internally using Google Apps Script usually, but we can pass it
         dataToSubmit.append('submissionDate', new Date().toLocaleString());
@@ -130,7 +104,7 @@ const TournamentRegistration = () => {
                     <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">Registration Successful!</h2>
                     <p className="text-gray-600 mb-8 leading-relaxed">
-                        Thank you for registering for <strong>{tournament.name}</strong>. We have received your details. Our team will contact you shortly with further instructions.
+                        Thank you for registering for <strong>{tournament.name || tournament.title}</strong>. We have received your details. Our team will contact you shortly with further instructions.
                     </p>
                     <button
                         onClick={() => navigate('/tournaments')}
@@ -163,7 +137,7 @@ const TournamentRegistration = () => {
                                 Official Registration
                             </span>
                             <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-4">
-                                {tournament.name}
+                                {tournament.name || tournament.title}
                             </h1>
 
                             <div className="flex flex-wrap gap-4 mt-6 text-sm text-gray-300">
@@ -173,7 +147,7 @@ const TournamentRegistration = () => {
                                 </div>
                                 <div className="flex items-center bg-gray-800/50 px-4 py-2 rounded-lg">
                                     <MapPin className="w-4 h-4 mr-2 text-brand-light" />
-                                    {tournament.venue}
+                                    {tournament.venue || tournament.location}
                                 </div>
                                 <div className="flex items-center bg-gray-800/50 px-4 py-2 rounded-lg">
                                     <Trophy className="w-4 h-4 mr-2 text-brand-light" />

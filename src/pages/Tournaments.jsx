@@ -3,32 +3,13 @@ import { motion } from 'framer-motion';
 import { Trophy, Calendar, MapPin, Clock, ExternalLink, Award, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FeaturedVideo from '../components/sections/FeaturedVideo';
+import useTournaments from '../hooks/useTournaments';
 
 const Tournaments = () => {
-    const upcomingTournaments = [
-        {
-            id: 1,
-            name: "Golden Jubilee State Level Tournament",
-            date: "August 3, 2025",
-            venue: "P.S. Senior Secondary School, Mylapore",
-            time: "09:00 AM",
-            format: "Swiss System, 4 Games",
-            rating: "FIDE Rated & Unrated",
-            status: "Registration Open",
-            prizePool: "₹10,000 top prize + Trophies"
-        },
-        {
-            id: 2,
-            name: "SRM IST State Level Tournament",
-            date: "September 20, 2025",
-            venue: "SRM IST Ramapuram Campus",
-            time: "09:00 AM",
-            format: "Swiss System, 4 Games",
-            rating: "FIDE Rated & Unrated Category",
-            status: "Upcoming",
-            prizePool: "₹10,000 top prize + Medals"
-        }
-    ];
+    const { tournaments, loading } = useTournaments();
+
+    // Use the fetched tournaments straight from the hook
+    const upcomingTournaments = tournaments;
 
     return (
         <div className="bg-white min-h-screen text-gray-900 font-sans">
@@ -76,70 +57,87 @@ const Tournaments = () => {
                             </h2>
                             <p className="text-gray-500 text-lg">Register early to secure your spot.</p>
                         </div>
-                        {/* <a href="#" className="text-brand-primary hover:text-brand-dark transition-colors flex items-center font-bold mt-4 md:mt-0 group">
-                            Full Calendar <ExternalLink className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
-                        </a> */}
                     </div>
 
-                    <div className="grid gap-6">
-                        {upcomingTournaments.map((tournament) => (
-                            <motion.div
-                                key={tournament.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 hover:border-brand-primary/50 transition-all shadow-sm hover:shadow-xl group relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-2 h-full bg-brand-primary/10 group-hover:bg-brand-primary transition-colors"></div>
-                                <div className="flex flex-col lg:flex-row lg:items-center justify-between">
-                                    <div className="flex-1">
-                                        <div className="flex items-center space-x-3 mb-4">
-                                            <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${tournament.status === 'Registration Open' ? 'bg-green-100 text-green-700 border border-green-200' :
-                                                tournament.status === 'Upcoming' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                                                    'bg-purple-100 text-purple-700 border border-purple-200'
-                                                }`}>
-                                                {tournament.status}
-                                            </span>
-                                            <span className="text-gray-500 font-medium text-sm bg-gray-100 px-3 py-1 rounded-full">{tournament.rating}</span>
+                    {loading ? (
+                        <div className="flex justify-center py-20">
+                            <div className="w-12 h-12 border-4 border-brand-primary/30 border-t-brand-primary rounded-full animate-spin"></div>
+                        </div>
+                    ) : upcomingTournaments.length === 0 ? (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="bg-white rounded-3xl p-12 text-center border border-gray-200 shadow-sm max-w-3xl mx-auto"
+                        >
+                            <div className="w-20 h-20 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Trophy className="w-10 h-10 text-brand-primary" />
+                            </div>
+                            <h3 className="text-3xl font-bold text-gray-900 mb-4">No Tournaments Scheduled</h3>
+                            <p className="text-xl text-gray-500 mb-8 max-w-xl mx-auto">
+                                We are currently preparing our next season of tournaments. Check back soon or subscribe to our newsletter to receive updates as soon as new events are announced!
+                            </p>
+                        </motion.div>
+                    ) : (
+                        <div className="grid gap-6">
+                            {upcomingTournaments.map((tournament) => (
+                                <motion.div
+                                    key={tournament.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 hover:border-brand-primary/50 transition-all shadow-sm hover:shadow-xl group relative overflow-hidden"
+                                >
+                                    <div className="absolute top-0 right-0 w-2 h-full bg-brand-primary/10 group-hover:bg-brand-primary transition-colors"></div>
+                                    <div className="flex flex-col lg:flex-row lg:items-center justify-between">
+                                        <div className="flex-1">
+                                            <div className="flex items-center space-x-3 mb-4">
+                                                <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${tournament.status === 'Registration Open' ? 'bg-green-100 text-green-700 border border-green-200' :
+                                                    tournament.status === 'Upcoming' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
+                                                        'bg-purple-100 text-purple-700 border border-purple-200'
+                                                    }`}>
+                                                    {tournament.status}
+                                                </span>
+                                                <span className="text-gray-500 font-medium text-sm bg-gray-100 px-3 py-1 rounded-full">{tournament.rating}</span>
+                                            </div>
+                                            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-primary transition-colors">
+                                                {tournament.name || tournament.title}
+                                            </h3>
+                                            <div className="flex flex-wrap gap-y-3 gap-x-6 text-sm text-gray-600 font-medium">
+                                                <div className="flex items-center">
+                                                    <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
+                                                        <Calendar className="h-4 w-4 text-brand-primary" />
+                                                    </div>
+                                                    {tournament.date}
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
+                                                        <Clock className="h-4 w-4 text-brand-primary" />
+                                                    </div>
+                                                    {tournament.time}
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
+                                                        <MapPin className="h-4 w-4 text-brand-primary" />
+                                                    </div>
+                                                    {tournament.venue || tournament.location}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-primary transition-colors">
-                                            {tournament.name}
-                                        </h3>
-                                        <div className="flex flex-wrap gap-y-3 gap-x-6 text-sm text-gray-600 font-medium">
-                                            <div className="flex items-center">
-                                                <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
-                                                    <Calendar className="h-4 w-4 text-brand-primary" />
-                                                </div>
-                                                {tournament.date}
-                                            </div>
-                                            <div className="flex items-center">
-                                                <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
-                                                    <Clock className="h-4 w-4 text-brand-primary" />
-                                                </div>
-                                                {tournament.time}
-                                            </div>
-                                            <div className="flex items-center">
-                                                <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center mr-3">
-                                                    <MapPin className="h-4 w-4 text-brand-primary" />
-                                                </div>
-                                                {tournament.venue}
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div className="mt-8 lg:mt-0 lg:ml-12 flex flex-col sm:flex-row lg:flex-col items-center sm:items-end justify-between lg:justify-center min-w-[160px] gap-4 sm:gap-0 lg:gap-4 border-t lg:border-t-0 lg:border-l border-gray-100 pt-6 lg:pt-0 lg:pl-10">
-                                        <div className="text-center sm:text-right">
-                                            <span className="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Prize Pool</span>
-                                            <span className="text-2xl font-black text-brand-primary">{tournament.prizePool}</span>
+                                        <div className="mt-8 lg:mt-0 lg:ml-12 flex flex-col sm:flex-row lg:flex-col items-center sm:items-end justify-between lg:justify-center min-w-[160px] gap-4 sm:gap-0 lg:gap-4 border-t lg:border-t-0 lg:border-l border-gray-100 pt-6 lg:pt-0 lg:pl-10">
+                                            <div className="text-center sm:text-right">
+                                                <span className="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Prize Pool</span>
+                                                <span className="text-2xl font-black text-brand-primary">{tournament.prizePool}</span>
+                                            </div>
+                                            <Link to={`/register/${tournament.id}`} className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20 text-center">
+                                                Register Now
+                                            </Link>
                                         </div>
-                                        <Link to={`/register/${tournament.id}`} className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20 text-center">
-                                            Register Now
-                                        </Link>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
             {/* Featured Video Section */}
