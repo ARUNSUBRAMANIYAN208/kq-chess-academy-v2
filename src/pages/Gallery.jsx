@@ -14,6 +14,9 @@ import tournament7 from '../assets/tournament_10.jpeg';
 import tournament8 from '../assets/tournament_11.jpeg';
 import tournament9 from '../assets/tournament_12.jpeg';
 import tournament10 from '../assets/tournament_13.jpeg';
+import tournament11 from '../assets/tournament_14.jpeg';
+import tournament12 from '../assets/tournament_15.jpeg';
+import tournament13 from '../assets/tournament_16.jpeg';
 
 const Gallery = () => {
     // Reusing images to create a fuller gallery grid
@@ -28,6 +31,9 @@ const Gallery = () => {
         { src: tournament8, title: "" },
         { src: tournament9, title: "" },
         { src: tournament10, title: "" },
+        { src: tournament11, title: "" },
+        { src: tournament12, title: "" },
+        { src: tournament13, title: "" },
         // { src: chessTournament, title: "State Level Tournament 2024" },
         // { src: chessClass, title: "Weekend Advanced Batch" },
         // { src: chessWinner, title: "National Junior Champion" },
