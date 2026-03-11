@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, ArrowRight, Info } from 'lucide-react';
+import { Calendar, Clock, MapPin, ArrowRight, Info, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useTournaments from '../../hooks/useTournaments';
 
 const UpcomingEvents = () => {
     const { tournaments, loading } = useTournaments();
 
-    // If you only want to show a few on the home page, you could slice:
-    const events = tournaments.slice(0, 2);
+    // Only show future/upcoming events on the home page
+    const events = tournaments.filter(t => t.status !== 'Completed').slice(0, 2);
 
     return (
         <section className="py-20 bg-gray-50/50">

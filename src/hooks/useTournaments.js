@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 
 // Instructions for the user:
 // 1. Create a Google Sheet with the following headers (exactly as written, case sensitive):
-// id, title, date, time, location, description, format, rating, status, prizePool
+// id, title, date, time, location, description, format, rating, status, prizePool, prospectus
 // 2. Go to File -> Share -> Publish to web
 // 3. Choose "Entire Document" and "Comma-separated values (.csv)"
 // 4. Click Publish and copy the link.
@@ -26,7 +26,12 @@ const useTournaments = () => {
             }
 
             try {
-                Papa.parse(GOOGLE_SHEET_CSV_URL, {
+                // Add a cache-busting timestamp to the URL
+                const cacheBusterUrl = GOOGLE_SHEET_CSV_URL.includes('?')
+                    ? `${GOOGLE_SHEET_CSV_URL}&t=${Date.now()}`
+                    : `${GOOGLE_SHEET_CSV_URL}?t=${Date.now()}`;
+
+                Papa.parse(cacheBusterUrl, {
                     download: true,
                     header: true,
                     skipEmptyLines: true,
@@ -47,7 +52,8 @@ const useTournaments = () => {
                                 format: row.format || '',
                                 rating: row.rating || '',
                                 status: row.status || '',
-                                prizePool: row.prizePool || ''
+                                prizePool: row.prizePool || '',
+                                prospectus: row.prospectus || row.link || ''
                             }));
 
                         // If CSV is empty, fallback
@@ -107,7 +113,23 @@ const getFallbackData = () => [
         format: "Swiss System, 4 Games",
         rating: "FIDE Rated & Unrated Category",
         status: "Upcoming",
-        prizePool: "₹10,000 top prize + Medals"
+        prizePool: "₹10,000 top prize + Medals",
+        prospectus: ""
+    },
+    {
+        id: "0",
+        title: "Inaugural Chess Championship 2024",
+        name: "Inaugural Chess Championship 2024",
+        date: "Dec 15, 2024",
+        time: "10:00 AM",
+        location: "KQ Chess Academy Main Center",
+        venue: "KQ Chess Academy Main Center",
+        description: "Our first major championship event featuring players from all branches.",
+        format: "Swiss System, 5 Rounds",
+        rating: "Unrated",
+        status: "Completed",
+        prizePool: "₹5,000 + Trophies",
+        prospectus: "https://example.com/prospectus-2024.pdf"
     }
 ];
 

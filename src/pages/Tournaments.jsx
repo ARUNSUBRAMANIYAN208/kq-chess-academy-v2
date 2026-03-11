@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Calendar, MapPin, Clock, ExternalLink, Award, Users } from 'lucide-react';
+import { Trophy, Calendar, MapPin, Clock, ExternalLink, Award, Users, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FeaturedVideo from '../components/sections/FeaturedVideo';
 import useTournaments from '../hooks/useTournaments';
@@ -8,8 +8,9 @@ import useTournaments from '../hooks/useTournaments';
 const Tournaments = () => {
     const { tournaments, loading } = useTournaments();
 
-    // Use the fetched tournaments straight from the hook
-    const upcomingTournaments = tournaments;
+    // Filter tournaments into upcoming and past
+    const upcomingTournaments = tournaments.filter(t => t.status !== 'Completed');
+    const pastTournaments = tournaments.filter(t => t.status === 'Completed');
 
     return (
         <div className="bg-white min-h-screen text-gray-900 font-sans">
@@ -98,6 +99,16 @@ const Tournaments = () => {
                                                     {tournament.status}
                                                 </span>
                                                 <span className="text-gray-500 font-medium text-sm bg-gray-100 px-3 py-1 rounded-full">{tournament.rating}</span>
+                                                {tournament.prospectus && (
+                                                    <a
+                                                        href={tournament.prospectus}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-light underline underline-offset-4"
+                                                    >
+                                                        <FileText className="w-3 h-3 mr-1" /> Prospectus
+                                                    </a>
+                                                )}
                                             </div>
                                             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-primary transition-colors">
                                                 {tournament.name || tournament.title}
@@ -140,6 +151,62 @@ const Tournaments = () => {
                     )}
                 </div>
             </section>
+
+            {/* Previous Events Section */}
+            {pastTournaments.length > 0 && (
+                <section className="py-24 bg-white">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="mb-12">
+                            <h2 className="text-4xl font-black text-gray-900 mb-2">
+                                Previous Events
+                            </h2>
+                            <p className="text-gray-500 text-lg">Relive the highlights and view event details.</p>
+                        </div>
+
+                        <div className="grid gap-6 md:grid-cols-2">
+                            {pastTournaments.map((tournament) => (
+                                <motion.div
+                                    key={tournament.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all flex flex-col justify-between"
+                                >
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gray-200 text-gray-600 border border-gray-300">
+                                                {tournament.status}
+                                            </span>
+                                            <span className="text-gray-400 text-sm font-medium">{tournament.date}</span>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-4">
+                                            {tournament.name || tournament.title}
+                                        </h3>
+                                        <div className="flex items-center text-sm text-gray-500 mb-6">
+                                            <MapPin className="h-4 w-4 mr-2 text-gray-400" />
+                                            {tournament.venue || tournament.location}
+                                        </div>
+                                    </div>
+
+                                    {tournament.prospectus && (
+                                        <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
+                                            <span className="text-xs text-brand-primary font-bold">Prospectus Available</span>
+                                            <a
+                                                href={tournament.prospectus}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center text-brand-primary bg-white hover:bg-brand-primary hover:text-white px-4 py-2 rounded-lg font-bold text-sm transition-all border border-brand-primary/20"
+                                            >
+                                                <FileText className="w-4 h-4 mr-2" /> View Prospectus
+                                            </a>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
             {/* Featured Video Section */}
             <FeaturedVideo />
 

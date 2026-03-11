@@ -68,8 +68,8 @@ const About = () => {
             </section>
 
             <FounderProfile />
-            <Team />
-            <Achievements />
+            {/* <Team />
+            <Achievements /> */}
         </div>
     );
 };
