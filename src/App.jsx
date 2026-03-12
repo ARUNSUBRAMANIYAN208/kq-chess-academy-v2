@@ -8,10 +8,12 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Tournaments from './pages/Tournaments';
 import TournamentRegistration from './pages/TournamentRegistration';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -23,7 +23,7 @@ const Home = () => {
             <GalleryPreview />
             <HomeCenters />
             <FAQ />
-            <Achievements />
+            {/* <Achievements /> */}
             <Testimonials />
         </div>
     );

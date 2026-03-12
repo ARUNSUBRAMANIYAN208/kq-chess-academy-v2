@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" fill="none">
+    <!-- Solid Green Square -->
+    <rect x="2" y="2" width="35" height="35" fill="#28a745" rx="2" />
+    
+    <!-- Outlined Square (Overlapping) slightly darker green to stand out against white tabs if necessary, or white depending on original design. I will use the green #28a745 and white #fff -->
+    <rect x="15" y="15" width="35" height="35" stroke="#ffffff" stroke-width="4" fill="#28a745" rx="2" />
+</svg>
