@@ -198,7 +198,7 @@ const Contact = () => {
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                                     <input
-                                        type="tel"
+                                        type="number"
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
