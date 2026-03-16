@@ -23,42 +23,80 @@ Follow these quick steps to make the tournament registration form send data dire
 
 ```javascript
 function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  
-  // Get data from the React form
-  var rowData = [
-    e.parameter.submissionDate || new Date(),
-    e.parameter.tournamentName,
-    e.parameter.tournamentDate,
-    e.parameter.playerName,
-    e.parameter.fideId,
-    e.parameter.fideRating,
-    e.parameter.dob,
-    e.parameter.email,
-    e.parameter.phone,
-    e.parameter.district
-  ];
-  
-  // Append new row
-  sheet.appendRow(rowData);
-  
-  // Return success response to React
-  return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName("Tournament Registrations") || ss.getSheets()[0];
+    
+    // Normalize: Trim, lowercase, and collapse multiple spaces into one
+    function normalize(str) {
+      return String(str || "").trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+    
+    var tournamentName = normalize(e.parameter.tournamentName);
+    var maxLimit = 10; 
+    var currentCount = 0;
+    
+    try {
+      var data = sheet.getDataRange().getValues();
+      if (data.length > 1) {
+        for (var i = 1; i < data.length; i++) {
+          // Normalizing existing names from the sheet
+          var existingName = normalize(data[i][1]);
+          if (existingName === tournamentName) {
+            currentCount++;
+          }
+        }
+      }
+    } catch (err) {}
+    
+    // DEBUG LOG: View this in the "Executions" tab!
+    console.log("Tourney: " + tournamentName + " | Found: " + currentCount + " | Limit: " + maxLimit);
+    
+    if (currentCount >= maxLimit) {
+      // We still return a result, but the code on the frontend in "no-cors" mode 
+      // won't be able to read this. The important thing is it doesn't appendRow.
+      return ContentService.createTextOutput(JSON.stringify({ result: 'error', message: 'Full' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // DATA SUBMISSION (Only happens if currentCount < maxLimit)
+    var rowData = [
+      e.parameter.submissionDate || new Date().toLocaleString(),
+      e.parameter.tournamentName,
+      e.parameter.tournamentDate || "",
+      e.parameter.playerName || "",
+      e.parameter.fideId || "",
+      e.parameter.fideRating || "",
+      e.parameter.dob || "",
+      e.parameter.email || "",
+      e.parameter.phone || "",
+      e.parameter.district || ""
+    ];
+    
+    sheet.appendRow(rowData);
+    return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ result: 'error', error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 ```
 
 3. Click the **Save** icon (looks like a floppy disk).
 
-## Step 3: Publish as a Web App
+## Step 3: Publish as a Web App (IMPORTANT!)
 1. Click the blue **Deploy** button in the top right > **New deployment**.
+   - *Note: If you are updating, you MUST select "New deployment" to apply changes. Do not just save.*
 2. Click the gear icon "Select type" and choose **Web app**.
 3. Fill out the details:
-   - **Description**: Form Receiver
+   - **Description**: Fixed Form Receiver
    - **Execute as**: Me (Your Email)
-   - **Who has access**: Anyone (THIS IS IMPORTANT!)
-4. Click **Deploy**. (You may need to authorize access by clicking "Review permissions" -> Choose your account -> Advanced -> Go to script).
-5. Copy the **Web app URL** that appears.
+   - **Who has access**: **Anyone** (This is critical for the website to work!)
+4. Click **Deploy**.
+5. Copy the **Web app URL**.
+   - *⚠️ Check if this URL is different from your current one. If it is different, you must update it in your code.*
 
 ## Step 4: Add URL to the Codebase
 1. Open the file [src/pages/TournamentRegistration.jsx](file:///d:/My_Projects/kq-chess-academy-v2/src/pages/TournamentRegistration.jsx) in your project.

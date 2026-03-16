@@ -92,12 +92,18 @@ const Tournaments = () => {
                                     <div className="flex flex-col lg:flex-row lg:items-center justify-between">
                                         <div className="flex-1">
                                             <div className="flex items-center space-x-3 mb-4">
-                                                <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${tournament.status === 'Registration Open' ? 'bg-green-100 text-green-700 border border-green-200' :
-                                                    tournament.status === 'Upcoming' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
-                                                        'bg-purple-100 text-purple-700 border border-purple-200'
+                                                <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${tournament.status === 'Registration Full' ? 'bg-red-100 text-red-700 border border-red-200' :
+                                                    tournament.status === 'Registration Open' ? 'bg-green-100 text-green-700 border border-green-200' :
+                                                        tournament.status === 'Upcoming' ? 'bg-blue-100 text-blue-700 border border-blue-200' :
+                                                            'bg-purple-100 text-purple-700 border border-purple-200'
                                                     }`}>
                                                     {tournament.status}
                                                 </span>
+                                                {tournament.status === 'Registration Open' && tournament.remainingSpots <= 50 && tournament.remainingSpots > 0 && (
+                                                    <span className="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded-md border border-orange-200 animate-pulse">
+                                                        Only {tournament.remainingSpots} spots left!
+                                                    </span>
+                                                )}
                                                 <span className="text-gray-500 font-medium text-sm bg-gray-100 px-3 py-1 rounded-full">{tournament.rating}</span>
                                                 {tournament.prospectus && (
                                                     <a
@@ -140,9 +146,15 @@ const Tournaments = () => {
                                                 <span className="block text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Prize Pool</span>
                                                 <span className="text-2xl font-black text-brand-primary">{tournament.prizePool}</span>
                                             </div>
-                                            <Link to={`/register/${tournament.id}`} className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20 text-center">
-                                                Register Now
-                                            </Link>
+                                            {tournament.status === 'Registration Full' ? (
+                                                <button disabled className="w-full sm:w-auto bg-gray-200 text-gray-500 px-6 py-2.5 rounded-lg font-bold cursor-not-allowed border border-gray-300 shadow-inner">
+                                                    Sold Out
+                                                </button>
+                                            ) : (
+                                                <Link to={`/register/${tournament.id}`} className="w-full sm:w-auto text-brand-primary bg-brand-primary/10 hover:bg-brand-primary hover:text-white px-6 py-2.5 rounded-lg font-bold transition-all border border-brand-primary/20 text-center">
+                                                    Register Now
+                                                </Link>
+                                            )}
                                         </div>
                                     </div>
                                 </motion.div>

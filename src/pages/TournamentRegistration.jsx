@@ -42,7 +42,7 @@ const TournamentRegistration = () => {
         const newErrors = {};
         if (!formData.playerName.trim()) newErrors.playerName = 'Player name is required';
         if (!formData.dob) newErrors.dob = 'Date of birth is required';
-        
+
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -72,58 +72,58 @@ const TournamentRegistration = () => {
         setErrorMessage('');
 
         // YOU MUST REPLACE THIS URL WITH YOUR PUBLISHED GOOGLE APP SCRIPT WEB APP URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDVD5_ZzZXDGxsMKkcybeCbS-gBZ3mUx_usTVJyw6bSbmcdKhspQVitduuaQ8JHMGX/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwYp4yV09r7wG9_nVJ0dOF1fws7Mdpsl7WVGjpOrqwINIFb4_9p5job_7sZgoO4aLRq/exec';
 
-        // Add tournament specific data to the submission
-        const dataToSubmit = new FormData();
+        // Use URLSearchParams for best compatibility with Google Apps Script e.parameter
+        const searchParams = new URLSearchParams();
+
+        // Add form fields
         Object.keys(formData).forEach(key => {
-            dataToSubmit.append(key, formData[key]);
+            searchParams.append(key, formData[key]);
         });
 
-        // Ensure we gracefully handle mapping where title/name might be interchangeable depending on the CSV
+        // Add tournament specific data
         const tName = tournament.name || tournament.title || 'Unknown Tournament';
         const tDate = tournament.date || 'Unknown Date';
         const tVenue = tournament.venue || tournament.location || 'Unknown Venue';
 
-        dataToSubmit.append('tournamentName', tName);
-        dataToSubmit.append('tournamentDate', tDate);
-        dataToSubmit.append('tournamentVenue', tVenue);
-
-        // Add timestamp internally using Google Apps Script usually, but we can pass it
-        dataToSubmit.append('submissionDate', new Date().toLocaleString());
+        searchParams.append('tournamentName', tName);
+        searchParams.append('tournamentDate', tDate);
+        searchParams.append('tournamentVenue', tVenue);
+        searchParams.append('submissionDate', new Date().toLocaleString());
 
         try {
-            // Note: Since Google Apps script CORS can be tricky, `no-cors` is often used 
-            // but it hides the response. If your script allows CORS, you will get a 200 OK.
-            // Replace with standard fetch if your apps script handles CORS.
-
-            // Dummy simulation for now if the URL is not replaced.
             if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
-                // Simulate network request
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 setStatus('success');
                 return;
             }
 
-            const response = await fetch(scriptURL, {
+            // no-cors is essential for Google Apps Script redirects.
+            // URLSearchParams will send as application/x-www-form-urlencoded
+            await fetch(scriptURL, {
                 method: 'POST',
-                body: dataToSubmit,
-                // mode: 'no-cors' // Uncomment if you face CORS issues (but you won't see success response body)
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: searchParams
             });
 
-            if (response.ok || response.type === 'opaque') {
-                setStatus('success');
-            } else {
-                throw new Error('Network response was not ok.');
-            }
+            // With no-cors, we cannot read the response, so we assume success
+            setStatus('success');
         } catch (error) {
             console.error('Error!', error.message);
             setStatus('error');
-            setErrorMessage('Something went wrong submitting your registration. Please try again.');
+            setErrorMessage(error.message.includes('Full')
+                ? 'We are sorry, but this tournament has reached its maximum capacity of 300 players.'
+                : 'Something went wrong submitting your registration. Please try again.');
         }
     };
 
     if (!tournament) return null;
+
+    const isFull = tournament.status === 'Registration Full';
 
     if (status === 'success') {
         return (
@@ -196,6 +196,16 @@ const TournamentRegistration = () => {
                             <p className="text-gray-500">Please fill out all the details carefully to confirm your entry.</p>
                         </div>
 
+                        {isFull && (
+                            <div className="mb-8 bg-amber-50 border-l-4 border-amber-500 p-6 rounded-xl flex items-center">
+                                <AlertCircle className="w-8 h-8 text-amber-500 mr-4 shrink-0" />
+                                <div>
+                                    <h4 className="font-bold text-amber-800 text-lg">Registration Closed</h4>
+                                    <p className="text-amber-700">This tournament has reached its maximum capacity of 400 players. We are no longer accepting new registrations.</p>
+                                </div>
+                            </div>
+                        )}
+
                         {status === 'error' && (
                             <div className="mb-8 bg-red-50 border-l-4 border-red-500 p-4 rounded-r flex items-start">
                                 <AlertCircle className="w-5 h-5 text-red-500 mr-3 mt-0.5 shrink-0" />
@@ -203,7 +213,7 @@ const TournamentRegistration = () => {
                             </div>
                         )}
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className={`space-y-6 ${isFull ? 'opacity-50 pointer-events-none' : ''}`}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Player Name */}
                                 <div className="space-y-2">
