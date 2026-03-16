@@ -23,6 +23,7 @@ const TournamentRegistration = () => {
 
     const [status, setStatus] = useState('idle'); // idle, submitting, success, error
     const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (!loading && !tournament) {
@@ -32,10 +33,41 @@ const TournamentRegistration = () => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (errors[e.target.name]) {
+            setErrors({ ...errors, [e.target.name]: '' });
+        }
+    };
+
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.playerName.trim()) newErrors.playerName = 'Player name is required';
+        if (!formData.dob) newErrors.dob = 'Date of birth is required';
+        
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Valid email is required';
+        }
+
+        if (!formData.phone.trim()) {
+            newErrors.phone = 'Phone number is required';
+        } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
+            newErrors.phone = 'Valid 10+ digit phone number is required';
+        }
+
+        if (!formData.district.trim()) newErrors.district = 'District/City is required';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validate()) {
+            return;
+        }
+
         setStatus('submitting');
         setErrorMessage('');
 
@@ -180,12 +212,12 @@ const TournamentRegistration = () => {
                                         type="text"
                                         id="playerName"
                                         name="playerName"
-                                        required
                                         value={formData.playerName}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400 ${errors.playerName ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                                         placeholder="E.g. Viswanathan Anand"
                                     />
+                                    {errors.playerName && <p className="text-xs text-red-500 font-medium ml-1">{errors.playerName}</p>}
                                 </div>
 
                                 {/* Date of Birth */}
@@ -195,11 +227,11 @@ const TournamentRegistration = () => {
                                         type="date"
                                         id="dob"
                                         name="dob"
-                                        required
                                         value={formData.dob}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400 ${errors.dob ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                                     />
+                                    {errors.dob && <p className="text-xs text-red-500 font-medium ml-1">{errors.dob}</p>}
                                 </div>
 
                                 {/* FIDE ID */}
@@ -237,12 +269,12 @@ const TournamentRegistration = () => {
                                         type="email"
                                         id="email"
                                         name="email"
-                                        required
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400 ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                                         placeholder="player@email.com"
                                     />
+                                    {errors.email && <p className="text-xs text-red-500 font-medium ml-1">{errors.email}</p>}
                                 </div>
 
                                 {/* Phone */}
@@ -252,12 +284,12 @@ const TournamentRegistration = () => {
                                         type="tel"
                                         id="phone"
                                         name="phone"
-                                        required
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                                         placeholder="+91 98765 43210"
                                     />
+                                    {errors.phone && <p className="text-xs text-red-500 font-medium ml-1">{errors.phone}</p>}
                                 </div>
 
                                 {/* District / City */}
@@ -267,12 +299,12 @@ const TournamentRegistration = () => {
                                         type="text"
                                         id="district"
                                         name="district"
-                                        required
                                         value={formData.district}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400"
+                                        className={`w-full px-4 py-3 rounded-xl border focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-shadow bg-gray-50 focus:bg-white text-gray-900 placeholder-gray-400 ${errors.district ? 'border-red-500 bg-red-50' : 'border-gray-300'}`}
                                         placeholder="E.g. Chennai, Tamil Nadu"
                                     />
+                                    {errors.district && <p className="text-xs text-red-500 font-medium ml-1">{errors.district}</p>}
                                 </div>
                             </div>
 

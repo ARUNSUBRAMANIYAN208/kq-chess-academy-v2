@@ -23,8 +23,8 @@ const Footer = () => {
                         </p>
                         <div className="flex space-x-4">
                             <a href="https://www.facebook.com/vinothkumar.madhavan.9" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2.5 rounded-full hover:bg-brand-primary hover:text-white transition-all transform hover:-translate-y-1"><Facebook size={18} /></a>
-                            <a href="#" className="bg-gray-800 p-2.5 rounded-full hover:bg-brand-primary hover:text-white transition-all transform hover:-translate-y-1"><Instagram size={18} /></a>
-                            <a href="#" className="bg-gray-800 p-2.5 rounded-full hover:bg-brand-primary hover:text-white transition-all transform hover:-translate-y-1"><Twitter size={18} /></a>
+                            {/* <a href="#" className="bg-gray-800 p-2.5 rounded-full hover:bg-brand-primary hover:text-white transition-all transform hover:-translate-y-1"><Instagram size={18} /></a>
+                            <a href="#" className="bg-gray-800 p-2.5 rounded-full hover:bg-brand-primary hover:text-white transition-all transform hover:-translate-y-1"><Twitter size={18} /></a> */}
                         </div>
                     </div>
 
