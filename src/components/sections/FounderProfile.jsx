@@ -59,7 +59,7 @@ const FounderProfile = () => {
         <section className="py-20 bg-gray-50 border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.h2 
+                    <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -67,14 +67,14 @@ const FounderProfile = () => {
                     >
                         Meet Our Founder
                     </motion.h2>
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                         className="h-1 w-24 bg-brand-primary mx-auto rounded-full mb-6"
                     />
-                    <motion.p 
+                    <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -111,10 +111,10 @@ const FounderProfile = () => {
                                 <span className="font-semibold text-gray-900 w-20">Location:</span>
                                 <span>Chennai, India</span>
                             </div>
-                            <div className="flex text-gray-600">
+                            {/* <div className="flex text-gray-600">
                                 <span className="font-semibold text-gray-900 w-20 shrink-0">Education:</span>
                                 <span>Diploma in Mechanical Engineering, CN Polytechnic</span>
-                            </div>
+                            </div> */}
                             <div className="flex text-gray-600 mt-2">
                                 <span className="font-semibold text-gray-900 w-20 shrink-0">Languages:</span>
                                 <span>English, Tamil, Kannada, Telugu</span>
@@ -125,7 +125,7 @@ const FounderProfile = () => {
                     {/* Right Column - Details Tabs/Grids */}
                     <div className="lg:col-span-2 space-y-8">
                         {/* Summary */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -136,14 +136,14 @@ const FounderProfile = () => {
                                 Professional Summary
                             </h4>
                             <p className="text-gray-600 leading-relaxed">
-                                Highly accomplished FIDE Master (FM) with over 22 years of competitive and coaching experience in chess. 
-                                Founder and Proprietor of KQ Chess Academy with 12 Branches across Chennai. Specialized in training students 
-                                from beginner to National and International Tournament levels, with strong expertise in player development, 
+                                Highly accomplished FIDE Master (FM) with over 22 years of competitive and coaching experience in chess.
+                                Founder and Proprietor of KQ Chess Academy with 12 Branches across Chennai. Specialized in training students
+                                from beginner to National and International Tournament levels, with strong expertise in player development,
                                 institutional chess programs, and academy management.
                             </p>
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             variants={containerVariants}
                             initial="hidden"
                             whileInView="visible"

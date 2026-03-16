@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 // Import images
 import heroBg from '../../assets/hero-bg.png';
-import slide2 from '../../assets/tournament_4.jpeg';
+import slide2 from '../../assets/tournament_13.jpeg';
 import slide3 from '../../assets/tournament_5.jpeg';
-import slide4 from '../../assets/tournament_6.jpeg';
+import slide4 from '../../assets/tournament_8.jpeg';
 
 const slides = [
     {
@@ -15,7 +15,7 @@ const slides = [
         badge: "Welcome to KQ Chess Academy",
         title: <>Master the Art of <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-primary">Strategy</span></>,
         description: "Train with FIDE instructors and Grandmasters. Join a legacy of champions produced since 2008. We shape the future of chess.",
-        image: heroBg,
+        image: slide4,
         ctaPrimary: { text: "Explore Courses", link: "/programs" },
         ctaSecondary: { text: "Join Academy", link: "/contact" }
     },
@@ -37,15 +37,15 @@ const slides = [
         ctaPrimary: { text: "Our Curriculum", link: "/programs" },
         ctaSecondary: { text: "Book a Trial", link: "/contact" }
     },
-    {
-        id: 4,
-        badge: "Celebrate Success",
-        title: <>Your Journey to <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-primary">Grandmaster</span></>,
-        description: "Over 15 years of producing state and national champions. Start your winning legacy at KQ Chess Academy today.",
-        image: slide4,
-        ctaPrimary: { text: "Get Started", link: "/contact" },
-        ctaSecondary: { text: "Watch Videos", link: "/gallery" }
-    }
+    // {
+    //     id: 4,
+    //     badge: "Celebrate Success",
+    //     title: <>Your Journey to <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-dark to-brand-primary">Grandmaster</span></>,
+    //     description: "Over 15 years of producing state and national champions. Start your winning legacy at KQ Chess Academy today.",
+    //     image: slide4,
+    //     ctaPrimary: { text: "Get Started", link: "/contact" },
+    //     ctaSecondary: { text: "Watch Videos", link: "/gallery" }
+    // }
 ];
 
 const Hero = () => {
@@ -130,16 +130,16 @@ const Hero = () => {
                             >
                                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 lg:px-0">
                                     <Link
-                                        to={slides[currentSlide].ctaPrimary.link}
+                                        to="/about"
                                         className="group px-8 py-4 bg-brand-primary text-white font-bold rounded-full shadow-lg shadow-brand-primary/30 hover:shadow-xl hover:shadow-brand-primary/40 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center w-full sm:w-auto text-lg"
                                     >
-                                        {slides[currentSlide].ctaPrimary.text} <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                                        About Us <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                     <Link
-                                        to={slides[currentSlide].ctaSecondary.link}
+                                        to="/contact"
                                         className="px-8 py-4 bg-white border-2 border-gray-200 text-gray-900 font-bold rounded-full hover:border-brand-primary hover:text-brand-primary transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-center text-lg shadow-sm hover:shadow-md"
                                     >
-                                        {slides[currentSlide].ctaSecondary.text}
+                                        Contact Us
                                     </Link>
                                 </div>
                             </motion.div>
