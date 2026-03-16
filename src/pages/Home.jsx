@@ -24,7 +24,7 @@ const Home = () => {
             <HomeCenters />
             <FAQ />
             {/* <Achievements /> */}
-            <Testimonials />
+            {/* <Testimonials /> */}
         </div>
     );
 };
